@@ -1,0 +1,25 @@
+{
+  "name": "boiler-plate",
+  "version": "1.0.0",
+  "description": "boiler-plate",
+  "homepage": "https://github.com/sisyphus2020/boiler-plate#readme",
+  "bugs": {
+    "url": "https://github.com/sisyphus2020/boiler-plate/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sisyphus2020/boiler-plate.git"
+  },
+  "license": "ISC",
+  "author": "sisyphus2020",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "mongoose": "^9.2.4"
+  }
+}
