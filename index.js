@@ -2,18 +2,39 @@ const express = require('express')
 const app = express()
 const port = 5000
 
+const bodyParser = require('body-parser')
+// application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: true }))
+// application/json
+app.use(bodyParser.json())
+const { User } = require('./models/User')
+
+const config = require('./config/key')
+
 const mongoose = require('mongoose')
-mongoose.connect('mongodb+srv://victyory:mongodb@cluster0.x81rl8e.mongodb.net/?appName=Cluster0', {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true
-//    useCreateIndex: true,
-//    useFindAndModify: false
+mongoose.connect(config.mongoURI, {
     
 }).then(() => console.log('MongoDB Connected...'))
   .catch(err => console.log(err))
 
+
+
 app.get('/', (req, res) => {
-  res.send('Hello World! 안녕하세요.')
+  res.send('Hello World! 안녕하세요.! ')     
+})
+
+app.post('/register', async(req, res) => {
+  // 회원 가입 할 때 필요한 정보들을 client에서 가져오면
+  // 그것들을 데이터베이스에 넣어준다.
+  const user = new User(req.body)
+  try {
+    const savedUser = await user.save()
+    return res.status(200).json({
+      success: true
+    })
+  } catch (err) {
+    return res.json({ success: false, err })
+  } 
 })
 
 app.listen(port, () => {
